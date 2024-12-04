@@ -1,0 +1,61 @@
+package com.cg.controller;
+ 
+import java.time.LocalDateTime;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+ 
+import com.cg.dto.ResponseDto;
+import com.cg.entity.Response;
+import com.cg.service.ResponseService;
+ 
+@RestController
+@RequestMapping("/responses")
+public class ResponseController {
+	@Autowired
+	private ResponseService responseService;
+ 
+	@PostMapping("/addresponse/{postId}")
+	public Response addResponse(@RequestBody ResponseDto responseDto,@PathVariable("postId") int postId,@RequestHeader("loggedInUser") int devId) {
+		//responseDto.setDeveloperId(responseService.findDeveloperByUserName(userName).getDeveloperId()); 
+	    String now =LocalDateTime.now().toString();
+		responseDto.setDeveloperId(devId);
+		responseDto.setPostId(postId);
+		responseDto.setRespDateTime(LocalDateTime.parse(now.replace( " " , "T" )));
+		return responseService.addResponse(responseDto);      
+	}
+	@GetMapping("/getbyresponseid/{responseId}")
+	public Response getResponseByResponseId(@PathVariable("responseId") int responseId) {
+		return responseService.getResponseByResponseId(responseId);
+	}
+	@GetMapping("/getbypostid/{postId}")
+	public List<Response> getResponseByPost(@PathVariable("postId") int postId){
+		return responseService.getResponseByPost(postId);
+	}
+	@GetMapping("/getbydeveloperid/{developerId}")
+	public List<Response> getResponseByDeveloper(@PathVariable("developerId") int developerId){
+		return responseService.getResponseByDeveloper(developerId);
+	}
+	@DeleteMapping("/{responseId}")
+	public void removeResponseById(@PathVariable("responseId") int responseId,@RequestHeader("loggedInUser") int devId) {
+		responseService.removeResponse(responseId,devId);
+	}
+ 
+	@PutMapping("/updateresponse/{responseId}")
+	public Response updateResponse(@PathVariable("responseId") int responseId,@RequestBody ResponseDto responseDto,@RequestHeader("loggedInUser") int devId) {   	 
+		responseDto.setDeveloperId(devId);
+		String now =LocalDateTime.now().toString();
+		responseDto.setRespDateTime(LocalDateTime.parse(now.replace( " " , "T" )));
+		return responseService.updateResponse(responseDto,responseId);      
+	}
+
+ 
+}

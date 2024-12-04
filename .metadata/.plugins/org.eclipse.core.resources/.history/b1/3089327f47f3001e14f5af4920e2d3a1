@@ -1,0 +1,30 @@
+package com.cg;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.cg.controller.DeveloperController;
+import com.cg.repository.DeveloperRepository;
+
+@SpringBootTest
+class DeveloperTest {
+	@Mock
+	private DeveloperRepository developerService;
+	
+	@InjectMocks
+	private 
+	
+	DeveloperController developerController = new DeveloperController();
+	
+	
+	
+	@Test
+	@DisplayName("TESTCASE_FOR_ADD")
+	void testAddDev() {
+				
+	}
+
+}

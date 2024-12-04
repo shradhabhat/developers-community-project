@@ -1,0 +1,12 @@
+.container {
+    padding: 50px;
+}
+
+.desctiption {
+    height: 400px;
+}
+
+textarea {
+    width: 300px;
+    height: 150px;
+}

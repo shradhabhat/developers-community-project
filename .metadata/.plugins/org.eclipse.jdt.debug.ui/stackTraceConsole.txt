@@ -1,0 +1,6 @@
+java.lang.NullPointerException: Cannot invoke "com.cg.entity.Post.getQuery()" because "updatedPost" is null
+	at com.cg.PostTest.testUpdatePost(PostTest.java:96)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+

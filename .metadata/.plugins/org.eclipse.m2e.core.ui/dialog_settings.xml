@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="C:\Users\BANSROY\Documents\DEVELOPER COMMUNITY SYSTEM\naming-server"/>
+			<item value="C:\Users\BANSROY\Documents\DEVELOPER COMMUNITY SYSTEM\identity-service"/>
+			<item value="C:\Users\BANSROY\Documents\DEVELOPER COMMUNITY SYSTEM\api-gateway"/>
+			<item value="C:\Users\BANSROY\Downloads\securityFilesForMicroServices-master (2)\securityFilesForMicroServices-master\security-module\5-identity-service"/>
+			<item value="C:\Users\BANSROY\Downloads\securityFilesForMicroServices-master (2)\securityFilesForMicroServices-master\security-module\6-gate-way-for-security"/>
+			<item value="C:\Users\BANSROY\Downloads\securityFilesForMicroServices-master (2)\securityFilesForMicroServices-master\security-module\3-naming-server"/>
+			<item value="C:\Users\BANSROY\Downloads\securityFilesForMicroServices-master (2)\securityFilesForMicroServices-master\security-module"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+</section>

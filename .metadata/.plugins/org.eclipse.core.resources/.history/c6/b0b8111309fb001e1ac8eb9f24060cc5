@@ -1,0 +1,86 @@
+package com.cg.controller;
+ 
+import java.util.List;
+ 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+ 
+import com.cg.dto.SkillMapDto;
+import com.cg.entity.Skill;
+import com.cg.entity.SkillMap;
+import com.cg.service.SkillMapService;
+ 
+import jakarta.validation.Valid;
+ 
+@RestController
+@RequestMapping("/skillMap")
+public class SkillMapController {
+	@Autowired
+	private SkillMapService skillMapService;
+	@PostMapping
+	public void postSkillsDeveloper(@Valid   @RequestBody  SkillMapDto skillMapDto,@RequestHeader("loggedInUser") int userId) {
+		skillMapDto.setDeveloperId(userId);
+		skillMapService.addSkillMap(skillMapDto);
+	}
+	//to get all skills
+	@GetMapping
+	public List<SkillMap> getAllSkillMaps(@RequestHeader("loggedInUser") int devId,@RequestHeader("loggedInUser") int userId){
+		return skillMapService.getAllSkillMaps();
+	}
+	//to get the skillMap based on both the ids
+	@GetMapping("/{skillId}")
+	public SkillMap getSkillMapById(@Valid @PathVariable("skillId") Long skillId,@RequestHeader("loggedInUser") int userId ) {
+		return skillMapService.getSkillMapById(skillId, userId);
+	}
+	//to update a particular skillMap
+	@PutMapping("/{skillId}/{developerId}")
+	public SkillMap updateSkillMap(@Valid @PathVariable("skillId") Long skillId, @PathVariable("developerId") int developerId, @RequestBody SkillMapDto skillMapDto ,@RequestHeader("loggedInUser") int userId) {
+		return skillMapService.updateSkillMap(skillId, developerId, skillMapDto);
+	}
+	//to delete a particular skillMap
+	@DeleteMapping("/delete/{skillId}")
+	public void deleteSkillMap(@Valid @PathVariable("skillId") Long skillId,@RequestHeader("loggedInUser") int devId) {
+		skillMapService.deleteSkillMap(skillId, devId);
+	}
+	//to get the skillMaps of the user who is logged in
+	@GetMapping("/developer")
+	public List<SkillMap> findByDeveloperId(@Valid @RequestHeader("loggedInUser") int devId) {
+		return skillMapService.findByDeveloperId(devId);
+	}
+	//to get the skillMap of a particular developer
+	@GetMapping("/developer/{developerId}")
+	public List<SkillMap> findByDeveloperIdAll(@Valid @PathVariable("developerId") int developerId ,@RequestHeader("loggedInUser") int devId) {
+		return skillMapService.findByDeveloperId(developerId);
+	}
+	//to get the skillMap based on the skillId given 
+	@GetMapping("/skill/{skillId}")
+	public List<SkillMap> findBySkillId(@Valid  @PathVariable("skillId") Long skillId) {
+		return skillMapService.findBySkillId(skillId);
+	}
+	//to get the skills of the logged in user
+	@GetMapping("/skills")
+	public List<Skill> findSkillByDeveloperId(@RequestHeader("loggedInUser") int userId){
+		List<Skill> skill =skillMapService.findSkillByDeveloperId(userId);
+		return skill;
+	}
+	//to get the skills of a particular developer
+	@GetMapping("/skills/{devId}")
+	public List<Skill> findSkillByOtherDeveloperId(@Valid @PathVariable("devId") int developerId){
+		List<Skill> skill =skillMapService.findSkillByDeveloperId(developerId);
+		return skill;
+	}
+	//to update skill map for the logged in developer
+	@PutMapping("/update/{skillId}")
+	public SkillMap updateDevSkillMap(@Valid @PathVariable("skillId") Long skillId, @RequestBody SkillMapDto skillMapDto ,@RequestHeader("loggedInUser") int userId) {
+		return skillMapService.updateSkillMap(skillId, userId, skillMapDto);
+	}
+ 
+}

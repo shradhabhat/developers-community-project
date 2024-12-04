@@ -1,0 +1,28 @@
+.skillcard {
+  /* float: left; */
+  width: 47%;
+  height: 240px;
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+}
+
+
+.maincontainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.img {
+  position: center;
+}
+
+.card {
+  position: relative;
+}
+
+.edit-pencil {
+  position: absolute;
+}

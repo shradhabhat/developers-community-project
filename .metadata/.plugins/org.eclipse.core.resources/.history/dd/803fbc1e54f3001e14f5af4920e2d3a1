@@ -1,0 +1,61 @@
+package com.cg;
+
+import static org.mockito.Mockito.when;
+
+import java.time.LocalDate;
+import java.util.Arrays;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
+
+import com.cg.controller.DeveloperController;
+import com.cg.entity.Developer;
+import com.cg.repository.DeveloperRepository;
+import com.cg.service.DeveloperService;
+
+@SpringBootTest
+class DeveloperTest {
+	@Mock
+	private DeveloperRepository developerRepository;
+	
+	@InjectMocks
+	private DeveloperService developerService;
+	
+	@BeforeEach
+	void setUp() {
+		MockitoAnnotations.openMocks(this);
+	}
+	
+	
+	@Test
+	@DisplayName("TESTCASE_FOR_ALLDEVELOPERS")
+	void testAllDev() {
+		Developer developer1 = new Developer();
+		developer1.setUserName("bdroy");
+		developer1.setEmailAddress("roy.bd@gmail.com");
+		developer1.setDeveloperID(100);
+		developer1.setGithubLink("www.github/bd.com");
+		developer1.setMemberSince(LocalDate.now());
+		developer1.setReputationPoints(45);
+		
+		Developer developer2 = new Developer();
+		developer2.setUserName("akshi");
+		developer2.setEmailAddress("iyer.ak@gmail.com");
+		developer2.setDeveloperID(101);
+		developer2.setGithubLink("www.github/ak.com");
+		developer2.setMemberSince(LocalDate.now());
+		developer2.setReputationPoints(40);
+		
+		when(developerService.getAllDevelopersService()).
+		thenReturn(Arrays.asList(developer1,developer2));
+		
+		ResponseEntity<List>
+	}
+
+}
